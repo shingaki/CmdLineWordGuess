@@ -1,0 +1,22 @@
+{
+  "name": "cmdlinewordguess",
+  "version": "1.0.0",
+  "description": "cmdlinewordguess",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shingaki/CmdLineWordGuess.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shingaki/CmdLineWordGuess/issues"
+  },
+  "homepage": "https://github.com/shingaki/CmdLineWordGuess#readme",
+  "dependencies": {
+    "inquirer": "^6.3.1"
+  }
+}
