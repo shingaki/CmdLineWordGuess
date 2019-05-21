@@ -1,30 +1,28 @@
-// dependency for inquirer npm package
-
 //constructor Letter
-var Letter = function(theLetter, guessed) {
-    this.charValue = theLetter;
-    this.guessed = guessed;
+function Letter(theLetter) {
+    this.letter = theLetter;
+    this.guessed = false;
 
 
-
-// function to display underscore or letter
 
 this.buildString = function () {
-    if (theLetter == " ") {
-        guessed = true;
-        return " "
+    if (this.letter == " ") {
+        this.guessed = true;
+        return " ";
+    } else if (this.guessed == false) {
+        return "_";
+    } else {
+        return this.letter
     }
-    else if (guessed = false) {
-        return "_"
-    } else return theLetter
-}
+};
 
 
 // function return to determine if the letter guessed matches one or
 // more of the letters in the word, and set guessed accordingly
 
     this.guess = function (theGuess) {
-        if (theGuess === this.theLetter) {
+        if (theGuess === this.letter) {
+            console.log("AAA " + theGuess + " again " + this.letter);
             this.guessed = true;
         }
     }

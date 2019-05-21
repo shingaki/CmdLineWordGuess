@@ -2,7 +2,7 @@ var Word = require("./word.js");
 var inquirer = require("inquirer");
 
 //letterArray
-var letterArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+var letterArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 var citiesInTexas = ["Dallas",
     "Plano",
@@ -26,36 +26,51 @@ var citiesInTexas = ["Dallas",
     "Waco",
     "Grand Prairie",
     "Arlington"
-]
+];
 
 
-function getNewWord() {
-    var ranIndex = Math.floor(Math.random() * citiesInTexas.length);
-    var cityToGuess = citiesInTexas[ranIndex];
-    var theWord = new Word(cityToGuess);
-    var needNewWord = false;
-    return theWord;
-}
+var ranIndex = Math.floor(Math.random() * citiesInTexas.length);
+var cityToGuess = citiesInTexas[ranIndex];
 
+var theWord = new Word(cityToGuess);
+console.log("THE WORD -- " + theWord);
 
-
+var needNewWord = false;
 var wrongGuesses = [];
 var correctGuesses = [];
 var guessesLeft = 10;
-var needNewWord = false;
 
 //the logic to play the Game
 
 
 function playTheGame() {
+
+    console.log("playTheGame");
+
     if (needNewWord) {
-        theWord = getNewWord();
+        console.log("New Word Needed");
+        var ranIndex = Math.floor(Math.random() * citiesInTexas.length);
+        var cityToGuess = citiesInTexas[ranIndex];
+
+        // console.log("cityToGuess " + cityToGuess);
+
+        theWord = new Word(cityToGuess);
+        console.log("New Word Again " + theWord);
+
+        // console.log("the Word " + theWord);
+
+        needNewWord = false;
     }
 
-    // wordComplete
+    // holds the word that is complete
     var wordGuessed = [];
 
+    theWord.letters.forEach(checkWordComplete);
+
+    console.log("TEXT " + wordGuessed);
+
     if (wordGuessed.includes(false)) {
+        console.log("inside of wordGuessed");
         inquirer.prompt([
             {
                 type: "input",
@@ -63,10 +78,13 @@ function playTheGame() {
                 name: "letterSelected"
             }
         ]).then(function (input) {
-            if (!letterArray.includes(input.letterSelected) || input.letterSelected.length > 1) {
+            console.log("Letter Entered " + input.letterSelected);
+            if (!letterArray.includes(input.letterSelected) ||
+                input.letterSelected.length > 1) {
                 console.log("\nPlease try again!\n");
                 playTheGame();
-            } else if (wrongGuesses.includes(input.letterSelected) || correctGuesses.includes(input.letterSelected)) {
+            } else if (wrongGuesses.includes(input.letterSelected) ||
+                correctGuesses.includes(input.letterSelected)) {
                 console.log("\nYou have already guessed that letter you selected\n");
                 playTheGame();
             } else if (input.letterSelected === "") {
@@ -75,21 +93,29 @@ function playTheGame() {
             } else {
                 var checkWordArray = [];
 
+                console.log("In the last else statement");
+
                 theWord.playerGuess(input.letterSelected);
 
-                theWord.letters.forEach(checkWord);
+                console.log("Is it true or false " + theWord.playerGuess.guessed);
+
+                theWord.letters.forEach(wordCheck);
+
+                console.log("checkWordArray.join " + checkWordArray.join(""));
+                console.log("wordGuessed.join " + wordGuessed.join(""));
 
                 if (checkWordArray.join("") === wordGuessed.join("")) {
                     console.log("\nIncorrect\n");
 
                     wrongGuesses.push(input.letterSelected);
                     guessesLeft = guessesLeft - 1;
+
                 } else {
                     console.log("\nCorrect\n");
                     correctGuesses.push(input.letterSelected);
                 }
 
-                theWord();
+                theWord.displayTheWord();
 
                 console.log("Guesses Left: " + guessesLeft + "\n");
 
@@ -103,7 +129,10 @@ function playTheGame() {
                 }
 
                 function wordCheck(ltr) {
-                    checkWordArray.push(ltr.guess);
+                    console.log("in the wordCheck function");
+                    checkWordArray.push(ltr.guessed);
+                    // console.log("wordCheck  " + ltr.guess);
+                    console.log("checkWordArray " + checkWordArray);
                 }
             }
         });
@@ -112,9 +141,10 @@ function playTheGame() {
         restartTheGame();
     }
 
-    function checkWord(ltr) {
-        wordGuessed.push(ltr.guess);
+    function checkWordComplete(ltr) {
+        wordGuessed.push(ltr.guessed);
     }
+
 
     function restartTheGame() {
         inquirer.prompt([
@@ -137,8 +167,8 @@ function playTheGame() {
         });
     }
 }
-    getNewWord();
-    playTheGame();
+
+playTheGame();
 
 
 
