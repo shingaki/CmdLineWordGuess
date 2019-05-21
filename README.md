@@ -1,37 +1,32 @@
-## Welcome to GitHub Pages
+## Command Line Word Guess
 
-You can use the [editor on GitHub](https://github.com/shingaki/CmdLineWordGuess/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+The category of the word guess game include cities located in Texas. 
+You must enter lowercase alphabets only. 
+The game does not accept numbers or upper case letters.
+You can restart the game with a new word when you have provided 10 wrong answers or guessed the city name.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Approach
 
-```markdown
-Syntax highlighted code block
+First, I developed both the letter.js and word.js. I hard-coded the word to test whether the constructors were working as I expected.
 
-# Header 1
-## Header 2
-### Header 3
+Once I was satisfied with the letter.js and word.js files, I created the index.js file.
+This file holds the logic to:
 
-- Bulleted
-- List
+1. Randomly select a city
+2. Requests for th eplayer to enter a letter
+3. Accepts the letter and determines if the letter is in the name of the city.
+4. If th eletter is in the name then it prompts the player for another letter if all letters have not yet been provied. 
+5. If the city name is complete then the game will let the player know that they won the game and ask if they want to play aother game> 
+6. If the letter is not in the name of the city, the game will check if the player has run out of guesses. 
+If the player has not run out of guesses, then the game will decrement the guess count by 1 and ask for another letter.
+If the player has run out of guesses< then the game will let the player know that they lost, and that they can choose to play another game.
 
-1. Numbered
-2. List
+### Challenges
 
-**Bold** and _Italic_ and `Code` text
+I had challenges in managing the objects when trying to display them. 
+I also had a challenge in building the logic to determine if the player has won or not.
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/shingaki/CmdLineWordGuess/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
