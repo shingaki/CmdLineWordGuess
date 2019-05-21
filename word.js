@@ -3,10 +3,8 @@ var Letter = require("./letter.js");
 
 function Word(theWord) {
     this.letters = [];
+    this.theWord = theWord;
 
-    console.log("What is the word "+ theWord);
-    console.log("What is the length " + theWord.length);
-    console.log("What is the first position " + theWord[0]);
 
     for (var i = 0; theWord.length > i; i++) {
         var letter = new Letter(theWord[i]);
@@ -19,7 +17,7 @@ function Word(theWord) {
         var displayString = "";
 
         for (var j = 0; this.letters.length > j; j++) {
-                displayString += this.letters[j] + " ";
+                displayString = displayString + this.letters[j].letter + " ";
             }
         console.log(displayString + "\n--------------------------------\n");
         }

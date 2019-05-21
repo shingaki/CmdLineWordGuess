@@ -2,30 +2,30 @@ var Word = require("./word.js");
 var inquirer = require("inquirer");
 
 //letterArray
-var letterArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var letterArray = "abcdefghijklmnopqrstuvwxyz";
 
-var citiesInTexas = ["Dallas",
-    "Plano",
-    "Frisco",
-    "McKinney",
-    "San Angelo",
-    "Houston",
-    "Austin",
-    "Tyler",
-    "Lubbock",
-    "Round Rock",
-    "Canton",
-    "Keller Springs",
-    "DeSoto",
-    "Duncanville",
-    "Prosper",
-    "Little Elm",
-    "Melissa",
-    "Celina",
-    "Midlothian",
-    "Waco",
-    "Grand Prairie",
-    "Arlington"
+var citiesInTexas = ["dallas",
+    "plano",
+    "frisco",
+    "mckinney",
+    "san angelo",
+    "houston",
+    "austin",
+    "tyler",
+    "lubbock",
+    "round rock",
+    "canton",
+    "keller springs",
+    "desoto",
+    "duncanville",
+    "prosper",
+    "little elm",
+    "melissa",
+    "celina",
+    "midlothian",
+    "waco",
+    "grand prairie",
+    "arlington"
 ];
 
 
@@ -33,7 +33,6 @@ var ranIndex = Math.floor(Math.random() * citiesInTexas.length);
 var cityToGuess = citiesInTexas[ranIndex];
 
 var theWord = new Word(cityToGuess);
-console.log("THE WORD -- " + theWord);
 
 var needNewWord = false;
 var wrongGuesses = [];
@@ -45,7 +44,6 @@ var guessesLeft = 10;
 
 function playTheGame() {
 
-    console.log("playTheGame");
 
     if (needNewWord) {
         console.log("New Word Needed");
@@ -67,14 +65,11 @@ function playTheGame() {
 
     theWord.letters.forEach(checkWordComplete);
 
-    console.log("TEXT " + wordGuessed);
-
     if (wordGuessed.includes(false)) {
-        console.log("inside of wordGuessed");
         inquirer.prompt([
             {
                 type: "input",
-                message: "Please select a letter",
+                message: "Enter a lowercase letter between a-z.",
                 name: "letterSelected"
             }
         ]).then(function (input) {
@@ -129,10 +124,7 @@ function playTheGame() {
                 }
 
                 function wordCheck(ltr) {
-                    console.log("in the wordCheck function");
                     checkWordArray.push(ltr.guessed);
-                    // console.log("wordCheck  " + ltr.guess);
-                    console.log("checkWordArray " + checkWordArray);
                 }
             }
         });
